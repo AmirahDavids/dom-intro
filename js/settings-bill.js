@@ -49,7 +49,7 @@ function calculateSettingsTotal() {
                     break;
             };
 
-            if (totalSettings > warningLevelValue && totalSettings < criticalLevelValue) {
+            if (totalSettings >= warningLevelValue && totalSettings < criticalLevelValue) {
                 grandTotal.classList.remove("danger");
                 grandTotal.classList.add("warning");
             } else if (totalSettings >= criticalLevelValue) {
