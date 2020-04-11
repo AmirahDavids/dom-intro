@@ -76,8 +76,6 @@ function calculateSettingsTotal() {
             callGrandTotal.innerHTML = callTotalSettings.toFixed(2);
             smsGrandTotal.innerHTML = smsTotalSettings.toFixed(2);
             grandTotal.innerHTML = totalSettings.toFixed(2);
-        } else {
-            alert("Critical");
         }
     }
 
