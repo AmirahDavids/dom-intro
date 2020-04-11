@@ -36,20 +36,7 @@ function calculateSettingsTotal() {
     var checkedSettingsBtn = document.querySelector("input[name='billItemTypeWithSettings']:checked");
     if (checkedSettingsBtn) {
         var billItemType = checkedSettingsBtn.value
-        var actualValueOfItem = 0;
-        if (billItemType == "call") {
-            actualValueOfItem = callCostValue
-        } else {
-            actualValueOfItem = smsCostValue
-        }
-
-
-
-
-        if (totalSettings + actualValueOfItem < criticalLevelValue) {
-
-
-
+        if (totalSettings < criticalLevelValue) {
             switch (billItemType) {
                 case "call":
                     totalSettings += callCostValue;
