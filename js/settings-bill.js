@@ -22,14 +22,10 @@ var criticalLevelValue = 0.00;
 
 
 function settingsBillTotal() {
-    console.log('updating settings');
-    console.log(typeof (callCostSettingElement.value));
-
     callCostValue = Number(callCostSettingElement.value);
     smsCostValue = Number(smsCostSettingElement.value);
     warningLevelValue = Number(warningLevelSetting.value);
     criticalLevelValue = Number(criticalLevelSetting.value);
-    console.log(typeof (callCostValue));
 }
 
 function calculateSettingsTotal() {
