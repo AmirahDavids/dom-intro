@@ -26,6 +26,8 @@ function settingsBillTotal() {
     smsCostValue = Number(smsCostSettingElement.value);
     warningLevelValue = Number(warningLevelSetting.value);
     criticalLevelValue = Number(criticalLevelSetting.value);
+    changeTotalColor(totalSettings,warningLevelValue,criticalLevelValue)
+
 }
 
 function calculateSettingsTotal() {
@@ -45,21 +47,25 @@ function calculateSettingsTotal() {
                     break;
             };
 
-            if (totalSettings >= warningLevelValue && totalSettings < criticalLevelValue) {
-                grandTotal.classList.remove("danger");
-                grandTotal.classList.add("warning");
-            } else if (totalSettings >= criticalLevelValue) {
-                grandTotal.classList.remove("warning");
-                grandTotal.classList.add("danger");
-            } else {
-                grandTotal.classList.remove("warning");
-                grandTotal.classList.remove("danger");
-            }
-
+           changeTotalColor(totalSettings,warningLevelValue,criticalLevelValue)
             callGrandTotal.innerHTML = callTotalSettings.toFixed(2);
             smsGrandTotal.innerHTML = smsTotalSettings.toFixed(2);
             grandTotal.innerHTML = totalSettings.toFixed(2);
         }
+    }
+
+}
+
+function changeTotalColor(currentTotal,currentWarning,currentCritical) {
+    if (currentTotal >= currentWarning && currentTotal < currentCritical) {
+        grandTotal.classList.remove("danger");
+        grandTotal.classList.add("warning");
+    } else if (currentTotal >= currentCritical) {
+        grandTotal.classList.remove("warning");
+        grandTotal.classList.add("danger");
+    } else {
+        grandTotal.classList.remove("warning");
+        grandTotal.classList.remove("danger");
     }
 
 }
