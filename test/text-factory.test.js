@@ -65,7 +65,7 @@ describe("The textBillTotals function", function () {
 });
 
 var desc = "The getColorString Function";
-var testDesc = "return the appropriate color class for a given total";
+var testDesc = "return the appropriate color class ";
 
 describe(desc,test);
 
@@ -74,27 +74,12 @@ function test() {
     it(testDesc, function () {
         var instanceOfTextFactory = TextFactory();
         
-        instanceOfTextFactory.textAddBill("sms")
-        instanceOfTextFactory.textAddBill("sms")
-        instanceOfTextFactory.textAddBill("call")
-        instanceOfTextFactory.textAddBill("call")
-        instanceOfTextFactory.textAddBill("call") 
-        instanceOfTextFactory.textAddBill("sms")
-        instanceOfTextFactory.textAddBill("sms")
-        instanceOfTextFactory.textAddBill("sms")
-        instanceOfTextFactory.textAddBill("call")
-        instanceOfTextFactory.textAddBill("call")
-        instanceOfTextFactory.textAddBill("call") 
-    
-    
-        var totalM = instanceOfTextFactory.textBillTotals().totalTextBill;
-        var totaalM = "other string";
+        assert.equal( "" , instanceOfTextFactory.colorString())
 
-        assert.equal( "invalid" , instanceOfTextFactory.colorString(totaalM))
+    
     });
     it(testDesc, function () {
         var instanceOfTextFactory = TextFactory();
-        
         instanceOfTextFactory.textAddBill("sms")
         instanceOfTextFactory.textAddBill("sms")
         instanceOfTextFactory.textAddBill("call")
@@ -112,12 +97,7 @@ function test() {
         instanceOfTextFactory.textAddBill("call")
         instanceOfTextFactory.textAddBill("call")
         instanceOfTextFactory.textAddBill("call")  
-    
-    
-        var totalM = instanceOfTextFactory.textBillTotals().totalTextBill;
-        
-
-        assert.equal( "warning" , instanceOfTextFactory.colorString(totalM))
+        assert.equal( "warning" , instanceOfTextFactory.colorString())
     });
 }
 
@@ -156,12 +136,7 @@ function actualTest() {
     instanceOfTextFactory.textAddBill("call")
     instanceOfTextFactory.textAddBill("call")
     instanceOfTextFactory.textAddBill("call") 
-
-
-    var totalM = instanceOfTextFactory.textBillTotals().totalTextBill
-    
-    // This the test
-    assert.equal( "danger" , instanceOfTextFactory.colorString(totalM))
+    assert.equal( "danger" , instanceOfTextFactory.colorString())
 }
 
 
