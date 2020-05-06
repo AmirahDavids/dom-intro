@@ -1,7 +1,7 @@
 var billTypeTextElement = document.querySelector(".billTypeText");
 var callTotalOneElement = document.querySelector(".callTotalOne");
 var smsTotalOneElement = document.querySelector(".smsTotalOne");
-var grandTotaltotalOneElement = document.querySelector(".totalOne");
+var totalOneElement = document.querySelector(".totalOne");
 var textTotalAddBtn = document.querySelector(".addToBillBtn");
 
 // instance
@@ -14,7 +14,7 @@ function textBillTotal() {
     // process
     textBillFactory.textAddBill(action);
     var totalsTexty = textBillFactory.textBillTotals();
-    var colorTextTotal = textBillFactory.colorString(totalsTexty.totalTextBill);
+    var colorTextTotal = textBillFactory.colorString();
     //output
     callTotalOneElement.innerHTML = totalsTexty.callTextBill.toFixed(2)
     smsTotalOneElement.innerHTML = totalsTexty.smsTextBill.toFixed(2);

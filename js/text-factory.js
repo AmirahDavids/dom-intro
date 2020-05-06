@@ -31,13 +31,10 @@ function TextFactory() {
         };
     }
 
-    function getColorString(tot) {
-        if (typeof (tot) !== 'number') {
-            return "invalid";
-        }
-        if (tot > 30 && tot < 50) {
+    function getColorString() {
+        if (textFactoryTotal >= 30 && textFactoryTotal < 50) {
             return "warning";
-        } else if (tot >= 50) {
+        } else if (textFactoryTotal >= 50) {
             return "danger";
         } else {
             return "";
