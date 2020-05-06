@@ -1,0 +1,52 @@
+function TextFactory() {
+
+    var textFactoryTotal = 0.00;
+    var textFactoryCall = 0.00;
+    var textFactorySms = 0.00;
+
+    function addToBill(action) {
+        if (action != "" && action != null) {
+            switch (action) {
+                case "call":
+                    textFactoryCall += 2.75;
+                    textFactoryTotal += 2.75;
+                    break;
+                case "sms":
+                    textFactorySms += 0.75;
+                    textFactoryTotal += 0.75;
+                    break;
+                default:
+                    return false
+            };
+            return true;
+        }
+        return false;
+    }
+
+    function allTotals() {
+        return {
+            totalTextBill: parseFloat(textFactoryTotal),
+            callTextBill: parseFloat(textFactoryCall),
+            smsTextBill: parseFloat(textFactorySms)
+        };
+    }
+
+    function getColorString(tot) {
+        if (typeof (tot) !== 'number') {
+            return "invalid";
+        }
+        if (tot > 30 && tot < 50) {
+            return "warning";
+        } else if (tot >= 50) {
+            return "danger";
+        } else {
+            return "";
+        }
+    }
+
+    return {
+        textAddBill: addToBill,
+        textBillTotals: allTotals,
+        colorString: getColorString
+    }
+}
