@@ -1,54 +1,36 @@
-// get a reference to the sms or call radio buttons
 var billItemTypeRadioElement = document.querySelector(".billItemTypeRadio");
 var radioBillAddBtnElement = document.querySelector(".radioBillAddBtn");
 var callTotalTwoElement = document.querySelector(".callTotalTwo");
 var smsTotalTwoElement = document.querySelector(".smsTotalTwo");
 var totalTwoElement = document.querySelector(".totalTwo");
 
-var totalRadio = 0.00;
-var callRadio = 0.00;
-var smsRadio = 0.00;
-//get a reference to the add button
+// instance
+var textBillFactoryTwo = TextFactory();
+
+
+// event
 function radioBillTotal() {
     var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
     if (checkedRadioBtn) {
-        var billItemType = checkedRadioBtn.value
-        switch (billItemType) {
-            case "call":
-                totalRadio += 2.75;
-                callRadio += 2.75;
+        // input
+        var action = checkedRadioBtn.value;
 
-                break;
-            case "sms":
-                totalRadio += 0.75;
-                smsRadio += 0.75;
-                break;
-        };
-
-        if (totalRadio > 30 && totalRadio < 50) {
-            totalTwoElement.classList.remove("danger");
-            totalTwoElement.classList.add("warning");
-        } else if (totalRadio >= 50) {
-            totalTwoElement.classList.remove("warning");
-            totalTwoElement.classList.add("danger");
-        } else {
-            totalTwoElement.classList.remove("warning");
-            totalTwoElement.classList.remove("danger");
+        // process
+        textBillFactoryTwo.textAddBill(action);
+        var tt = textBillFactoryTwo.textBillTotals();
+        var colorTextTotalTwo = textBillFactoryTwo.colorString(tt.totalTextBill);
+        
+        //output
+        callTotalTwoElement.innerHTML = tt.callTextBill.toFixed(2)
+        smsTotalTwoElement.innerHTML = tt.smsTextBill.toFixed(2);
+        totalTwoElement.innerHTML = tt.totalTextBill.toFixed(2);
+        
+        totalTwoElement.classList.remove("warning")
+        totalTwoElement.classList.remove("danger")
+        if (colorTextTotalTwo != "") {
+            totalTwoElement.classList.add(colorTextTotalTwo)
         }
-
-        callTotalTwoElement.innerHTML = callRadio.toFixed(2);
-        smsTotalTwoElement.innerHTML = smsRadio.toFixed(2);
-        totalTwoElement.innerHTML = totalRadio.toFixed(2);
-
     }
 };
-
-
-
-
-// billItemType will be 'call' or 'sms'
-//create a variable that will keep track of the total bill
-
-//add an event listener for when the add button is pressed
 
 radioBillAddBtnElement.addEventListener('click', radioBillTotal);
