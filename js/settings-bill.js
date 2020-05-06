@@ -10,65 +10,43 @@ var criticalLevelSetting = document.querySelector(".criticalLevelSetting");
 var updateSettingsButton = document.querySelector(".updateSettings");
 var settingsAddButton = document.querySelector(".add")
 
-var callTotalSettings = 0.00;
-var smsTotalSettings = 0.00;
-var totalSettings = 0.00;
+
+var settingsFactory = SettingsFactory()
 
 
-var callCostValue = 0.00;
-var smsCostValue = 0.00;
-var warningLevelValue = 0.00;
-var criticalLevelValue = 0.00;
-
-
-function settingsBillTotal() {
-    callCostValue = Number(callCostSettingElement.value);
-    smsCostValue = Number(smsCostSettingElement.value);
-    warningLevelValue = Number(warningLevelSetting.value);
-    criticalLevelValue = Number(criticalLevelSetting.value);
-    changeTotalColor(totalSettings,warningLevelValue,criticalLevelValue)
-
+function updateEvent() {
+    var userInput = {
+        callSetting: callCostSettingElement.value,
+        smsSetting: smsCostSettingElement.value,
+        warningSetting: warningLevelSetting.value,
+        criticalSetting: criticalLevelSetting.value
+    };
+    settingsFactory.updateValues(userInput);
+    var colorString = settingsFactory.getColorString();
+    grandTotal.classList.remove("warning");
+    grandTotal.classList.remove("danger");
+    if (colorString != "") {
+        grandTotal.classList.add(colorString);
+    }
 }
 
 function calculateSettingsTotal() {
     var checkedSettingsBtn = document.querySelector("input[name='billItemTypeWithSettings']:checked");
     if (checkedSettingsBtn) {
         var billItemType = checkedSettingsBtn.value
-        if (totalSettings < criticalLevelValue) {
-            switch (billItemType) {
-                case "call":
-                    totalSettings += callCostValue;
-                    callTotalSettings += callCostValue;
-
-                    break;
-                case "sms":
-                    totalSettings += smsCostValue;
-                    smsTotalSettings += smsCostValue;
-                    break;
-            };
-
-           changeTotalColor(totalSettings,warningLevelValue,criticalLevelValue)
-            callGrandTotal.innerHTML = callTotalSettings.toFixed(2);
-            smsGrandTotal.innerHTML = smsTotalSettings.toFixed(2);
-            grandTotal.innerHTML = totalSettings.toFixed(2);
+        settingsFactory.addFunction(billItemType);
+        var colorString = settingsFactory.getColorString();
+        callGrandTotal.innerHTML = settingsFactory.settingsBillTotals().callTotalSettings.toFixed(2);
+        smsGrandTotal.innerHTML = settingsFactory.settingsBillTotals().smsTotalSettings.toFixed(2);
+        grandTotal.innerHTML = settingsFactory.settingsBillTotals().totalSettings.toFixed(2);
+        grandTotal.classList.remove("warning");
+        grandTotal.classList.remove("danger");
+        if (colorString != "") {
+            grandTotal.classList.add(colorString);
         }
     }
-
 }
 
-function changeTotalColor(currentTotal,currentWarning,currentCritical) {
-    if (currentTotal >= currentWarning && currentTotal < currentCritical) {
-        grandTotal.classList.remove("danger");
-        grandTotal.classList.add("warning");
-    } else if (currentTotal >= currentCritical) {
-        grandTotal.classList.remove("warning");
-        grandTotal.classList.add("danger");
-    } else {
-        grandTotal.classList.remove("warning");
-        grandTotal.classList.remove("danger");
-    }
 
-}
-
-updateSettingsButton.addEventListener("click", settingsBillTotal);
+updateSettingsButton.addEventListener("click", updateEvent);
 settingsAddButton.addEventListener("click", calculateSettingsTotal);
