@@ -61,6 +61,9 @@ function SettingsFactory() {
     }
 
     function getColorString() {
+        if (totalSettings === 0 ) {
+            return "";
+        }
         if (totalSettings >= warningLevelValue && totalSettings < criticalLevelValue) {
             return "warning";
         } else if (totalSettings >= criticalLevelValue) {
