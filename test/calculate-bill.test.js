@@ -28,6 +28,14 @@ describe("The addTheBill function", function () {
 describe("The getColorString function", function () {
     it("should return the color string ", function () {
         var object = CalculateFactory();
-        assert.equal(2.75, object.add("call"))
+        assert.equal("",object.color(object.add("call")) )
+    });
+    it("should return the color string ", function () {
+        var object = CalculateFactory();
+        assert.equal("danger",object.color(object.add("call,call,call,call,call,sms,call,call,call,call,call,call")) )
+
+    });  it("should return the color string ", function () {
+        var object = CalculateFactory();
+        assert.equal("warning",object.color(object.add("call,sms,call,call,sms,sms,call,call,call,call,call,call")) )
     });
 });

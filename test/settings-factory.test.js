@@ -86,8 +86,28 @@ describe("The settingsBillTotals function", function () {
             smsTotalSettings: 0.00
         }, totals)
     });
-});
-describe("The settingsBillTotals function", function () {
+    it("should return the correct totals for an instance", function () {
+        var myInstance = SettingsFactory()
+        var data = {
+            callSetting: "2.55",
+            smsSetting: "0.65",
+            warningSetting: "30.00",
+            criticalSetting: "50.00"
+        }
+        myInstance.updateValues(data)
+        myInstance.addFunction("call")
+        myInstance.addFunction("sms")
+        myInstance.addFunction("call")
+        myInstance.addFunction("sms")
+        var totals = myInstance.settingsBillTotals()
+        console.log(totals);
+        
+        assert.deepEqual({
+            totalSettings: 6.40,
+            callTotalSettings: 5.10,
+            smsTotalSettings: 1.30
+        }, totals)
+    });
     it("should return the correct totals for an instance", function () {
         var myInstance = SettingsFactory()
         var data = {
@@ -110,6 +130,7 @@ describe("The settingsBillTotals function", function () {
         }, totals)
     });
 });
+
 describe("The getColorString (settings widget)", function () {
     it("should return appropriate color string", function () {
         var Instance = SettingsFactory();

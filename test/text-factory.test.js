@@ -4,12 +4,23 @@ describe("The textAddBill function", function () {
         var instanceOfTextFactory = TextFactory();
         assert.equal(true, instanceOfTextFactory.textAddBill("call"));
         assert.equal(true, instanceOfTextFactory.textAddBill("sms"));
-        assert.equal(false, instanceOfTextFactory.textAddBill("data"));
-        assert.equal(false, instanceOfTextFactory.textAddBill(""));
-        assert.equal(false, instanceOfTextFactory.textAddBill(null));
+       
     });
-
-
+    it("should return false if action was  not added to the bill", function () {
+        var instanceOfTextFactory = TextFactory();
+        assert.equal(false, instanceOfTextFactory.textAddBill("data"));
+       
+    });
+    it("should return false if action was not added to the bill", function () {
+        var instanceOfTextFactory = TextFactory();
+        assert.equal(false, instanceOfTextFactory.textAddBill(""));
+       
+    });
+    it("should return false if action was not added to the bill", function () {
+        var instanceOfTextFactory = TextFactory();
+        assert.equal(false, instanceOfTextFactory.textAddBill("null"));
+       
+    });
 });
 
 describe("The textBillTotals function", function () {
